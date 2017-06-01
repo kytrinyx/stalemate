@@ -1,10 +1,14 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
-	"net/http/httputil"
+	"os"
+
+	"github.com/google/go-github/github"
+	"github.com/rjz/githubhook"
 )
 
 func hello(rw http.ResponseWriter, req *http.Request) {
@@ -12,12 +16,26 @@ func hello(rw http.ResponseWriter, req *http.Request) {
 }
 
 func processPayload(rw http.ResponseWriter, req *http.Request) {
-	dump, err := httputil.DumpRequest(req, true)
+	hook, err := githubhook.Parse([]byte(os.Getenv("STALEMATE_SECRET_TOKEN")), req)
 	if err != nil {
 		log.Println(err)
+		return
 	}
-	log.Println(string(dump))
-	fmt.Fprintf(rw, "{\"status\": \"ok\"}\n")
+
+	switch hook.Event {
+	case "integration_installation":
+		event := github.IntegrationInstallationEvent{}
+		if err := json.Unmarshal(hook.Payload, &event); err != nil {
+			log.Println(err)
+			return
+		}
+		// Echo back the installation part of the payload.
+		fmt.Fprintf(rw, event.Installation.String())
+
+	default:
+		log.Printf("not handling %s events yet", hook.Event)
+	}
+
 }
 
 func main() {
