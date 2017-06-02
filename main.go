@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -10,6 +11,22 @@ import (
 	"github.com/google/go-github/github"
 	"github.com/rjz/githubhook"
 )
+
+// Hard-coding this for now.
+var psqlInfo = "host=localhost port=5432 user=stalemate dbname=stalemate_development sslmode=disable"
+var db *sql.DB
+
+func InitDB(dbInfo string) {
+	var err error
+	db, err = sql.Open("postgres", dbInfo)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	if err = db.Ping(); err != nil {
+		log.Panic(err)
+	}
+}
 
 func hello(rw http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(rw, "This is stalemate.")
