@@ -17,6 +17,10 @@ var psqlInfo = "host=localhost port=5432 user=stalemate dbname=stalemate_develop
 var db *sql.DB
 
 func InitDB(dbInfo string) {
+	if db != nil {
+		return
+	}
+
 	var err error
 	db, err = sql.Open("postgres", dbInfo)
 	if err != nil {
@@ -40,19 +44,19 @@ func processPayload(rw http.ResponseWriter, req *http.Request) {
 	}
 
 	switch hook.Event {
-	case "integration_installation":
-		event := github.IntegrationInstallationEvent{}
+	case "team_add":
+		// Ignore this one.
+	case "team":
+		event := github.TeamEvent{}
 		if err := json.Unmarshal(hook.Payload, &event); err != nil {
 			log.Println(err)
-			return
 		}
-		// Echo back the installation part of the payload.
-		fmt.Fprintf(rw, event.Installation.String())
-
+		if err := SyncTeam(event); err != nil {
+			log.Println(err)
+		}
 	default:
 		log.Printf("not handling %s events yet", hook.Event)
 	}
-
 }
 
 func main() {

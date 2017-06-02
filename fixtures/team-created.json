@@ -1,0 +1,49 @@
+{
+  "action": "created",
+  "team": {
+    "name": "sleepers",
+    "id": 2378504,
+    "slug": "sleepers",
+    "description": "",
+    "privacy": "closed",
+    "url": "https://api.github.com/teams/2378504",
+    "members_url": "https://api.github.com/teams/2378504/members{/member}",
+    "repositories_url": "https://api.github.com/teams/2378504/repos",
+    "permission": "pull"
+  },
+  "organization": {
+    "login": "tornerose",
+    "id": 23771315,
+    "url": "https://api.github.com/orgs/tornerose",
+    "repos_url": "https://api.github.com/orgs/tornerose/repos",
+    "events_url": "https://api.github.com/orgs/tornerose/events",
+    "hooks_url": "https://api.github.com/orgs/tornerose/hooks",
+    "issues_url": "https://api.github.com/orgs/tornerose/issues",
+    "members_url": "https://api.github.com/orgs/tornerose/members{/member}",
+    "public_members_url": "https://api.github.com/orgs/tornerose/public_members{/member}",
+    "avatar_url": "https://avatars3.githubusercontent.com/u/23771315?v=3",
+    "description": null
+  },
+  "sender": {
+    "login": "kytrinyx",
+    "id": 276834,
+    "avatar_url": "https://avatars2.githubusercontent.com/u/276834?v=3",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/kytrinyx",
+    "html_url": "https://github.com/kytrinyx",
+    "followers_url": "https://api.github.com/users/kytrinyx/followers",
+    "following_url": "https://api.github.com/users/kytrinyx/following{/other_user}",
+    "gists_url": "https://api.github.com/users/kytrinyx/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/kytrinyx/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/kytrinyx/subscriptions",
+    "organizations_url": "https://api.github.com/users/kytrinyx/orgs",
+    "repos_url": "https://api.github.com/users/kytrinyx/repos",
+    "events_url": "https://api.github.com/users/kytrinyx/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/kytrinyx/received_events",
+    "type": "User",
+    "site_admin": true
+  },
+  "installation": {
+    "id": 30071
+  }
+}
