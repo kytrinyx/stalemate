@@ -28,7 +28,7 @@ func TestSyncTeam(t *testing.T) {
 	}
 
 	if countTeamsForAccount(t, team.Account) != 0 {
-		t.Error("Should not have created the team.")
+		t.Error("Should not have created the team (no repo yet).")
 	}
 
 	event = loadTeamEvent(t, "./fixtures/team-added-to-repo.json")
@@ -37,7 +37,7 @@ func TestSyncTeam(t *testing.T) {
 	}
 
 	if countTeamsForAccount(t, team.Account) != 0 {
-		t.Error("Should not have created the team.")
+		t.Error("Should not have created the team (permissions are read-only).")
 	}
 
 	event = loadTeamEvent(t, "./fixtures/team-edited-permissions-push.json")
