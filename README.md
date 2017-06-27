@@ -22,7 +22,9 @@ $ goose create NameOfMigration sql
 
 ## Run the App
 
-go run main.go team.go sync.go
+go install ./... && stalemate
+
+The `install` command installs it to `$GOPATH/bin/stalemate` by default. That will need to be on your path.
 
 ### Localtunnel
 
@@ -34,5 +36,5 @@ The configured subdomain should be some random string of characters so that ther
 no collisions. It's also whatever you put in your settings when you created the GitHub App.
 
 ```
-$ lt --port 9090 lt --port 9090 --subdomain=$CONFIGURED_SUBDOMAIN
+$ lt --port 9090 --subdomain=$CONFIGURED_SUBDOMAIN
 ```
