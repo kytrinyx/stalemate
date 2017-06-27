@@ -60,6 +60,7 @@ func processPayload(rw http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
+	InitDB(psqlInfo)
 	http.HandleFunc("/", hello)
 	http.HandleFunc("/events", processPayload)
 	if err := http.ListenAndServe(":9090", nil); err != nil {
