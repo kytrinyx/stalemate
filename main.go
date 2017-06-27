@@ -16,6 +16,8 @@ import (
 var psqlInfo = "host=localhost port=5432 user=stalemate dbname=stalemate_development sslmode=disable"
 var db *sql.DB
 
+const AppID = 2733
+
 func InitDB(dbInfo string) {
 	if db != nil {
 		return
@@ -29,6 +31,18 @@ func InitDB(dbInfo string) {
 
 	if err = db.Ping(); err != nil {
 		log.Panic(err)
+	}
+}
+
+func EnsureEnv() {
+	keys := []string{
+		"STALEMATE_SECRET_TOKEN",
+		"STALEMATE_PRIVATE_KEY",
+	}
+	for _, key := range keys {
+		if _, ok := os.LookupEnv(key); !ok {
+			panic(fmt.Sprintf("missing env var %s", key))
+		}
 	}
 }
 
