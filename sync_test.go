@@ -12,8 +12,7 @@ func init() {
 	InitDB(psqlInfo)
 }
 
-func TestSyncTeam(t *testing.T) {
-	t.Skip() // have to figure out how to stub the API call or something
+func TestSyncTeamEvent(t *testing.T) {
 
 	team := &Team{
 		Account:      "tornerose",
@@ -25,7 +24,7 @@ func TestSyncTeam(t *testing.T) {
 	var event github.TeamEvent
 
 	event = loadTeamEvent(t, "./fixtures/team-created.json")
-	if err := SyncTeam(event); err != nil {
+	if _, err := SyncTeamEvent(event); err != nil {
 		t.Error(err)
 	}
 
@@ -34,7 +33,7 @@ func TestSyncTeam(t *testing.T) {
 	}
 
 	event = loadTeamEvent(t, "./fixtures/team-added-to-repo.json")
-	if err := SyncTeam(event); err != nil {
+	if _, err := SyncTeamEvent(event); err != nil {
 		t.Error(err)
 	}
 
@@ -43,7 +42,7 @@ func TestSyncTeam(t *testing.T) {
 	}
 
 	event = loadTeamEvent(t, "./fixtures/team-edited-permissions-push.json")
-	if err := SyncTeam(event); err != nil {
+	if _, err := SyncTeamEvent(event); err != nil {
 		t.Error(err)
 	}
 
